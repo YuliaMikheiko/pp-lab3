@@ -81,12 +81,13 @@ int main(int argc, char** argv) {
 
         for (int i = 1; i < size; i++)
         {
-            MPI_Send(&N, 1, MPI_INT, i, TAG_N, MPI_COMM_WORLD);
-            }
+            int val = N % size;
+            MPI_Send(&val, 1, MPI_INT, i, TAG_N, MPI_COMM_WORLD);
+        }
 
         for (int i = 1; i < size; i++)
         {
-            MPI_Send(a, N, MPI_INT, i, TAG_A, MPI_COMM_WORLD);
+            MPI_Send(a, N % size, MPI_INT, i, TAG_A, MPI_COMM_WORLD);
         }
 
 
